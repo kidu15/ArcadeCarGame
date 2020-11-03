@@ -13,19 +13,69 @@ public:
 	}
 private:
 	float fCarPos = 0.0f; 
-	float fDistance = 0.0f; 
+	float fDistance = 0.0f;
+	float fSpeed = 0.0f; 
+	float fCurvature = 0.0f; 
+	float fPlayerCurvature = 0.0f; 
+	float fTrackCurvature = 0.0f; 
+
+	vector<pair<float, float>> vectrack; // curvature, distance 
+
 protected:
 	virtual	bool OnUserCreate()
 	{
+		vectrack.push_back(make_pair(0.0f, 10.0f)); //0 curvature for 10 distance 
+		vectrack.push_back(make_pair(0.0f, 200.0f)); //0 curvature for 200 distance 
+		vectrack.push_back(make_pair(1.0f, 200.0f)); //1 curvature for 200 distance 
+		vectrack.push_back(make_pair(0.0f, 400.0f)); //1 curvature for 200 distance 
+		vectrack.push_back(make_pair(-1.0f, 200.0f)); //1 curvature for 200 distance 
+		vectrack.push_back(make_pair(0.0f, 200.0f)); //1 curvature for 200 distance 
+
 		return true; 
 	}
 
 	virtual bool OnUserUpdate(float fElapsedTime)
 	{
-		//controlling the distance of the car 
+		//controlling the speed and distance of the car 
 
 		if (m_keys[VK_UP].bHeld)
-			fDistance += 100.0f * fElapsedTime;
+			fSpeed += 2.0f * fElapsedTime;
+		else
+			fSpeed -= 1.0f * fElapsedTime; 
+
+		if (m_keys[VK_LEFT].bHeld)
+			fPlayerCurvature -= 0.7f * fElapsedTime; 
+
+		if (m_keys[VK_RIGHT].bHeld)
+			fPlayerCurvature += 0.7f * fElapsedTime; 
+
+		if (fabs(fPlayerCurvature - fTrackCurvature) >= 0.8f)
+			fSpeed -= 5.0f * fElapsedTime; 
+
+		//controlling that the speed can't be -1
+		if (fSpeed < 0.0f) fSpeed = 0.0f; 
+		if (fSpeed > 2.0f) fSpeed = 2.0f;
+
+
+		fDistance += (fSpeed * 70.0f) * fElapsedTime;
+		// where is the car in the track? 
+
+		float fOffset = 0; 
+		int nTrackSection = 0; 
+
+		//find position 
+
+		while (nTrackSection < vectrack.size() && fOffset <= fDistance)
+		{
+			fOffset += vectrack[nTrackSection].second;
+			nTrackSection++; 
+		}
+
+		float fTargetCurvature = vectrack[nTrackSection - 1].first; 
+		float fTrackCurveDiff = (fTargetCurvature - fCurvature) * fElapsedTime * fSpeed; 
+		fCurvature += fTrackCurveDiff; 
+
+		fTrackCurvature += (fCurvature) * fElapsedTime * fSpeed; 
 
 		//erase screen 
 		Fill(0, 0, ScreenWidth(), ScreenHeight(), L' ', 0);
@@ -37,7 +87,7 @@ protected:
 				// adding perspective 
 				float fPerspective = (float)y / (ScreenHeight() / 2.0f); 
 
-				float fMiddlePoint = 0.5f; 
+				float fMiddlePoint = 0.5f + fCurvature * powf((1.0f - fPerspective),3); 
 				float fRoadWidth = 0.1f + fPerspective*0.8f; //60% of the screen will be the road
 				float fClipWidth = fRoadWidth * 0.10f; //the sides of the road will be 15% of the road 
 
@@ -86,6 +136,7 @@ protected:
 		}
 
 		//draw car  // -1 left, 0 center, 1 right 
+		fCarPos = fPlayerCurvature - fTrackCurvature; 
 		int nCarPos = ScreenWidth() / 2 + ((int)(ScreenWidth() * fCarPos) / 2.0f) - 7; 
 		
 		DrawStringAlpha(nCarPos, 80, L"   ||====||   ");

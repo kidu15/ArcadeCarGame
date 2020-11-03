@@ -1,7 +1,8 @@
 ﻿  RetroCar.cpp
-C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(49,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(50,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(51,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(52,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(89,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(68,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(99,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(100,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(101,21): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(102,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Arcade Car Game\RetroCar.cpp(140,15): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Arcade Car Game.vcxproj -> C:\Users\kidu1\Documents\Kidu\Projects-GIT\ArcadeCarGame\Arcade Car Game\Debug\Arcade Car Game.exe
